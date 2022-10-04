@@ -1,0 +1,24 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  resourceVersion: '269755'
+  name: mybuild
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'mypricecalcimagestream:latest'
+  resources: {}
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: src/main/docker/Dockerfile.jvm
+  postCommit: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/ambaumann/quarkus-kafka-streams-price-converter'
+  runPolicy: Serial
